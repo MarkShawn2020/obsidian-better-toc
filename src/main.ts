@@ -43,7 +43,23 @@ class TableOfContentsSettingsTab extends PluginSettingTab {
             this.display();
           })
       );
-
+    
+    new Setting(containerEl)
+      .setName("Format Style")
+      .setDesc("The format of list to render the table of contents as.")
+      .addDropdown((dropdown) =>
+        dropdown
+          .addOption("plain", "Plain")
+          .addOption("markdown", "markdown")
+          .addOption("wiki", "Wiki")
+          .setValue(this.plugin.settings.formatStyle)
+          .onChange((value) => {
+            this.plugin.settings.formatStyle = value as any;
+            this.plugin.saveData(this.plugin.settings);
+            this.display();
+          })
+      );
+    
     new Setting(containerEl)
       .setName("Title")
       .setDesc("Optional title to put before the table of contents")
@@ -87,22 +103,6 @@ class TableOfContentsSettingsTab extends PluginSettingTab {
             this.plugin.settings.maximumDepth = value;
             this.plugin.saveData(this.plugin.settings);
           })
-      );
-    
-    new Setting(containerEl)
-      .setName("Format Style")
-      .setDesc("The format of list to render the table of contents as.")
-      .addDropdown((dropdown) =>
-        dropdown
-          .addOption("plain", "Plain")
-          .addOption("markdown", "markdown")
-          .addOption("wiki", "Wiki")
-          .setValue(this.plugin.settings.formatStyle)
-          .onChange((value) => {
-          this.plugin.settings.formatStyle = value as any;
-          this.plugin.saveData(this.plugin.settings);
-          this.display();
-        })
       );
     
     const githubCompatDesc: DocumentFragment = new DocumentFragment()
