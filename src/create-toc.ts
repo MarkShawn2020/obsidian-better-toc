@@ -98,7 +98,7 @@ export const createToc = (
         return `${prefix} [[#${linkText}|${displayText}]]`;
       case "plain":
       default:
-        return displayText
+        return `${prefix} ${displayText}`
     }
   });
 
