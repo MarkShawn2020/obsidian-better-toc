@@ -1,55 +1,66 @@
-# obsidian-better-toc
+<p align="center">
+  <img src="docs/images/cover.png" alt="obsidian-better-toc Cover" width="100%">
+</p>
 
-Create a better table of contents for Obsidian notes.
+<h1 align="center">
+  <img src="assets/logo.svg" width="32" height="32" alt="Logo" align="top">
+  obsidian-better-toc
+</h1>
 
-![Example of content creation](example.gif)
+<p align="center">
+  <strong>Generate elegant table of contents for Obsidian notes</strong><br>
+  <sub>Obsidian Plugin</sub>
+</p>
+
+---
 
 ## Features
 
-This plugin exposes the following commands:
+| Command                                         | Description                              |
+| ----------------------------------------------- | ---------------------------------------- |
+| Create full table of contents                   | Generate TOC for all subheadings         |
+| Create table of contents for next heading level | Generate TOC scoped to immediate sublevel |
 
-| Action                                          | Hotkey           |
-| ----------------------------------------------- | ---------------- |
-| Create full table of contents                   | Blank by default |
-| Create table of contents for next heading level | Blank by default |
+| Setting              | Type                 | Default     |
+| -------------------- | -------------------- | ----------- |
+| List Style           | `bullet` or `number` | `bullet`    |
+| Format Style         | `plain`, `markdown`, `wiki` | `markdown` |
+| Title                | string               | (none)      |
+| Minimum header depth | 1-6                  | 2           |
+| Maximum header depth | 1-6                  | 6           |
+| GitHub Compatibility | boolean              | false       |
 
-And the following settings:
+## Demo
 
-| Setting              | type                 | Default    |
-| -------------------- | -------------------- | ---------- |
-| List Style           | 'bullet' or 'number' | 'bullet'   |
-| Title                | 'string'             | undefined' |
-| Minimum header depth | number               | 2          |
-| Maximum header depth | number               | 6          |
+![Example of content creation](example.gif)
 
 ## Usage
 
-This plugin will create a table of content for the sub-heading of the current heading level.
+The TOC is **scoped**: it only includes headings under the current heading until the next same-level heading.
 
 **Example:**
 
-_Input:_ Run "Table of Contents" under a level 2 heading  
-_Output:_ "Table of Contents" only contains subheadings of that level 2 heading
+_Input:_ Run "Table of Contents" under a level 2 heading
+_Output:_ TOC contains only subheadings of that level 2 heading
 
-## Installing
+### Recommended Hotkeys
 
-Either install the latest release from Obsidian directly or unzip the latest release into your `<vault>/.obsidian/plugins/` folder.
+- `CMD + SHIFT + T` → Create full table of contents
+- `CMD + T` → Create table of contents for next heading level
 
-Once the plugin is installed, you need to make sure that the switch for "Table of Contents" is turned on.
-After you are all setup you would see this plugins commands in the command palette (`CMD + P`).
-You can assign the commands to hotkeys for easy usage.
+## Installation
 
-Here is my setup:
+Install from Obsidian Community Plugins, or manually:
 
-- Create full table of contents => `CMD + SHIFT + T`
-- Create table of contents for next heading level => `CMD + T`
+1. Download latest release
+2. Extract to `<vault>/.obsidian/plugins/obsidian-better-toc/`
+3. Enable "Table of Contents" in Settings → Community Plugins
 
-## Customizations
+## Customization
 
-### Detailed Nested Ordered Lists
+### Nested Numbered Lists
 
-If you want the table of contents to use nested list counting (ex: 1.1, 1.2) add the following CSS snippet to obsidian.
-This will effect all ordered lists in your notes.
+Add this CSS snippet for nested list counting (1.1, 1.2):
 
 ```css
 ol {
@@ -67,51 +78,23 @@ ol li:before {
 }
 ```
 
-> NOTE: Make sure you enable the snippet in obsidian's options.
+Enable in Settings → Appearance → CSS Snippets.
 
 ## Development
 
-### Build Setup
-
-This plugin uses a modern build setup with esbuild:
-
 ```bash
-# Install dependencies
-pnpm install
-
-# Start development server with hot reload
-pnpm dev
-
-# Build for production
-pnpm build
+pnpm install    # Install dependencies
+pnpm dev        # Development with watch mode
+pnpm build      # Production build
 ```
 
-### Build System Notes
+## Tech Stack
 
-The build system was modernized to use direct esbuild configuration rather than the legacy obsidian-plugin-cli. This resolves compatibility issues with newer Node.js versions and dependencies.
+- TypeScript
+- Obsidian API
+- esbuild
+- anchor-markdown-header (GitHub link compatibility)
 
-The changes include:
+## License
 
-1. Custom `esbuild.config.mjs` for bundling
-2. Updated build scripts in package.json
-3. Dependency updates for compatibility with current Obsidian API
-
-### Obsidian API Compatibility
-
-This plugin has been updated to work with the current Obsidian API. Legacy code referencing deprecated API elements like `sourceMode.cmEditor` has been updated to use the current `editor` property.
-
-## Why Choose obsidian-better-toc?
-
-This plugin is a modernized fork of the original `obsidian-plugin-toc` with several key improvements:
-
-1. **Modern Build System**: Uses the latest esbuild configuration for better compatibility with current Node.js versions.
-
-2. **Updated API Compatibility**: Works with the latest Obsidian API, fixing deprecated code patterns that could break functionality.
-
-3. **Active Maintenance**: Regularly updated to ensure compatibility with the latest Obsidian releases.
-
-4. **Performance Optimizations**: Improved code structure for better performance and reliability.
-
-5. **Future Enhancements**: Planned improvements include automatic TOC updates, custom styling options, and more flexible configuration.
-
-If you've experienced issues with the original TOC plugin or want a more reliable and future-proof solution, `obsidian-better-toc` is the right choice for you.
+MIT
